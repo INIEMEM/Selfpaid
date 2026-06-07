@@ -106,497 +106,161 @@ const LandingPage = () => {
     <div style={{ background: '#000', color: '#fff', minHeight: '100vh' }}>
       <Navbar />
 
-      {/* ════ HERO ════════════════════════════════════════════════════════════ */}
-      <div
-        style={{
-          minHeight: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          position: 'relative',
-          overflow: 'hidden',
-          padding: '100px 5% 60px',
-        }}
-      >
-        {/* Glow effects */}
-        <div
-          className="animate-glow"
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: 700,
-            height: 700,
-            borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(126,211,72,0.12) 0%, transparent 70%)',
-            pointerEvents: 'none',
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            top: '10%',
-            right: '5%',
-            width: 400,
-            height: 400,
-            borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%)',
-            pointerEvents: 'none',
-          }}
-        />
-        {/* SVG noise */}
-        <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.03, pointerEvents: 'none' }}>
-          <filter id="noise">
-            <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
-            <feColorMatrix type="saturate" values="0" />
-          </filter>
-          <rect width="100%" height="100%" filter="url(#noise)" />
-        </svg>
-
-        {/* Content */}
-        <div style={{ textAlign: 'center', position: 'relative', zIndex: 1, maxWidth: 860 }}>
-          {/* Badge */}
-          <div
-            className="animate-fade-up"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 8,
-              border: '1px solid rgba(126,211,72,0.4)',
-              background: 'rgba(126,211,72,0.08)',
-              borderRadius: 50,
-              padding: '6px 16px',
-              marginBottom: 28,
-              animationDelay: '0s',
-            }}
-          >
-            <span className="animate-pulse-dot" style={{ width: 8, height: 8, borderRadius: '50%', background: '#7ed348', display: 'inline-block' }} />
-            <span style={{ fontFamily: "'Outfit',sans-serif", fontWeight: 600, fontSize: 13, letterSpacing: '0.1em', color: '#7ed348', textTransform: 'uppercase' }}>
-              Now Live
-            </span>
+      {/* ════ HUMANIZED HERO ═══════════════════════════════════════════════════ */}
+      <div style={{ minHeight: '90vh', padding: '120px 5% 60px', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden' }}>
+        {/* Glow Effects */}
+        <div className="animate-glow" style={{ position: 'absolute', top: '40%', right: '10%', transform: 'translate(50%, -50%)', width: 600, height: 600, borderRadius: '50%', background: 'radial-gradient(circle, rgba(126,211,72,0.15) 0%, transparent 70%)', pointerEvents: 'none' }} />
+        
+        <div style={{ maxWidth: 1300, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '60px', alignItems: 'center', position: 'relative', zIndex: 1 }}>
+          
+          {/* Left: Punchy Copy */}
+          <div className="animate-fade-up">
+            <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(56px, 8vw, 100px)', lineHeight: 0.95, margin: '0 0 24px', color: '#fff' }}>
+              How work <br />
+              <span style={{ color: '#7ed348' }}>should work.</span>
+            </h1>
+            <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(16px, 2vw, 20px)', color: 'rgba(255,255,255,0.7)', margin: '0 0 40px', lineHeight: 1.6, maxWidth: 500 }}>
+              Forget the endless back-and-forth and high platform fees. SelfPaid connects you with top global talent and secure escrow payouts.
+            </p>
+            <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+              <button onClick={() => navigate('/register')} style={{ background: '#7ed348', color: '#000', border: 'none', borderRadius: 50, padding: '16px 36px', fontFamily: "'Outfit',sans-serif", fontWeight: 700, fontSize: 16, cursor: 'pointer', transition: 'transform 0.2s', boxShadow: '0 8px 24px rgba(126,211,72,0.2)' }} onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'} onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}>
+                Find Talent
+              </button>
+              <button onClick={() => navigate('/register')} style={{ background: 'transparent', color: '#fff', border: '1px solid rgba(255,255,255,0.3)', borderRadius: 50, padding: '16px 36px', fontFamily: "'Outfit',sans-serif", fontWeight: 600, fontSize: 16, cursor: 'pointer', transition: 'border-color 0.2s' }} onMouseEnter={e => e.currentTarget.style.borderColor = '#7ed348'} onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'}>
+                Earn Money
+              </button>
+            </div>
+            <div style={{ marginTop: 32, display: 'flex', alignItems: 'center', gap: 12 }}>
+              <div style={{ display: 'flex' }}>
+                {['https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&q=80', 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&q=80', 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&q=80'].map((src, i) => (
+                  <img key={i} src={src} alt="user" style={{ width: 40, height: 40, borderRadius: '50%', border: '2px solid #000', marginLeft: i > 0 ? -12 : 0, objectFit: 'cover' }} />
+                ))}
+              </div>
+              <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', fontFamily: "'Outfit',sans-serif" }}>Trusted by {stats.totalUsers > 0 ? stats.totalUsers : '3,000'}+ global users</span>
+            </div>
           </div>
 
-          {/* Logo Icon */}
-          <div className="animate-fade-up animate-float" style={{ marginBottom: 24, animationDelay: '0.1s', filter: 'drop-shadow(0 0 30px rgba(126,211,72,0.5))' }}>
-            <Logo size="lg" />
+          {/* Right: Human Photo Grid (Upwork style) */}
+          <div className="animate-float" style={{ position: 'relative', height: 500, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            {/* Main Center Image */}
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80" alt="Team working" style={{ width: '80%', height: '80%', objectFit: 'cover', borderRadius: 24, boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }} />
+            {/* Floating Top Left */}
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80" alt="Professional Woman" style={{ position: 'absolute', top: 20, left: 0, width: 140, height: 140, objectFit: 'cover', borderRadius: '50%', border: '6px solid #000', boxShadow: '0 10px 30px rgba(0,0,0,0.4)' }} />
+            {/* Floating Bottom Right */}
+            <div style={{ position: 'absolute', bottom: 40, right: -10, background: '#111', border: '1px solid rgba(126,211,72,0.3)', borderRadius: 16, padding: '16px 20px', display: 'flex', alignItems: 'center', gap: 12, boxShadow: '0 10px 30px rgba(0,0,0,0.4)' }}>
+              <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'rgba(126,211,72,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20 }}>✅</div>
+              <div>
+                <div style={{ fontWeight: 700, fontSize: 14 }}>Approved!</div>
+                <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)' }}>Payment Released</div>
+              </div>
+            </div>
           </div>
 
-          {/* Headline */}
-          <h1
-            className="animate-fade-up"
-            style={{
-              fontFamily: "'Bebas Neue', sans-serif",
-              fontSize: 'clamp(64px, 10vw, 130px)',
-              lineHeight: 0.95,
-              margin: '0 0 16px',
-              animationDelay: '0.2s',
-            }}
-          >
-            <span style={{ display: 'block', color: '#fff' }}>GET PAID</span>
-            <span style={{ display: 'block', color: '#fff' }}>FOR WHAT</span>
-            <span
-              style={{
-                display: 'block',
-                background: 'linear-gradient(135deg, #7ed348, #c9a84c)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              YOU DO
-            </span>
-          </h1>
+        </div>
+      </div>
 
-          {/* Subheading */}
-          <p
-            className="animate-fade-up"
-            style={{
-              fontFamily: "'Outfit', sans-serif",
-              fontWeight: 600,
-              fontSize: 'clamp(13px, 2vw, 17px)',
-              letterSpacing: '0.25em',
-              textTransform: 'uppercase',
-              color: '#c9a84c',
-              margin: '0 0 20px',
-              animationDelay: '0.3s',
-            }}
-          >
-            The Global Task Platform
-          </p>
-
-          {/* Description */}
-          <p
-            className="animate-fade-up"
-            style={{
-              fontFamily: "'Outfit', sans-serif",
-              fontSize: 'clamp(15px, 1.6vw, 18px)',
-              color: 'rgba(255,255,255,0.6)',
-              maxWidth: 560,
-              margin: '0 auto 36px',
-              lineHeight: 1.7,
-              animationDelay: '0.4s',
-            }}
-          >
-            SelfPaid connects skilled workers with businesses and individuals who need tasks done — fast, fair, and fully secure. Post a task, earn money, and get paid doing what you're already good at.
-          </p>
-
-          {/* CTA Buttons */}
-          <div
-            className="animate-fade-up"
-            style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 48, animationDelay: '0.5s' }}
-          >
-            <button
-              onClick={() => navigate('/register')}
-              style={{
-                background: 'linear-gradient(135deg, #7ed348, #4caf50)',
-                color: '#000',
-                border: 'none',
-                borderRadius: 50,
-                padding: '16px 40px',
-                fontFamily: "'Outfit', sans-serif",
-                fontWeight: 700,
-                fontSize: 16,
-                cursor: 'pointer',
-                letterSpacing: '0.03em',
-                boxShadow: '0 0 30px rgba(126,211,72,0.3)',
-                transition: 'transform 0.2s, box-shadow 0.2s',
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 0 40px rgba(126,211,72,0.5)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 0 30px rgba(126,211,72,0.3)'; }}
-            >
-              Start Earning
-            </button>
-            <button
-              onClick={() => navigate('/register')}
-              style={{
-                background: 'transparent',
-                color: '#fff',
-                border: '1px solid rgba(255,255,255,0.25)',
-                borderRadius: 50,
-                padding: '16px 40px',
-                fontFamily: "'Outfit', sans-serif",
-                fontWeight: 600,
-                fontSize: 16,
-                cursor: 'pointer',
-                transition: 'border-color 0.2s, color 0.2s',
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#7ed348'; e.currentTarget.style.color = '#7ed348'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)'; e.currentTarget.style.color = '#fff'; }}
-            >
-              Post a Task
-            </button>
+      {/* ════ TRUSTED BY LOGOS ════════════════════════════════════════════════ */}
+      <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)', padding: '40px 5%', background: '#050505', textAlign: 'center' }}>
+        <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 24, fontWeight: 600 }}>Trusted by modern companies worldwide</p>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 'clamp(30px, 8vw, 80px)', flexWrap: 'wrap', opacity: 0.4 }}>
+          {/* Using generic SVG shapes for clean, aesthetic generic company logos */}
+          <div style={{ fontSize: 24, fontWeight: 800, fontFamily: "'Outfit',sans-serif", display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div style={{ width: 24, height: 24, background: '#fff', borderRadius: 4, transform: 'rotate(45deg)' }} /> Acme Corp
           </div>
-
-          {/* Divider */}
-          <div style={{ width: '100%', height: 1, background: 'rgba(255,255,255,0.08)', margin: '0 0 36px' }} />
-
-          {/* Stats Row */}
-          <div
-            className="animate-fade-up"
-            style={{ display: 'flex', justifyContent: 'center', gap: 'clamp(24px,5vw,64px)', flexWrap: 'wrap', animationDelay: '0.6s' }}
-          >
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 40, color: '#7ed348', lineHeight: 1 }}>
-                <AnimatedCounter target={stats.totalUsers || 0} suffix="+" />
-              </div>
-              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', marginTop: 4 }}>Total Users</div>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 40, color: '#7ed348', lineHeight: 1 }}>
-                <AnimatedCounter target={stats.completedTasks || 0} suffix="+" />
-              </div>
-              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', marginTop: 4 }}>Tasks Completed</div>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 40, color: '#7ed348', lineHeight: 1 }}>
-                <AnimatedCounter target={stats.openTasks || 0} />
-              </div>
-              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', marginTop: 4 }}>Tasks Available</div>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 40, color: '#c9a84c', lineHeight: 1 }}>10%</div>
-              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', marginTop: 4 }}>Platform Fee</div>
-            </div>
+          <div style={{ fontSize: 24, fontWeight: 800, fontFamily: "'Outfit',sans-serif", display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div style={{ width: 24, height: 24, border: '4px solid #fff', borderRadius: '50%' }} /> Globex
+          </div>
+          <div style={{ fontSize: 24, fontWeight: 800, fontFamily: "'Outfit',sans-serif", display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div style={{ width: 0, height: 0, borderLeft: '12px solid transparent', borderRight: '12px solid transparent', borderBottom: '24px solid #fff' }} /> Vertex
+          </div>
+          <div style={{ fontSize: 24, fontWeight: 800, fontFamily: "'Outfit',sans-serif", display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div style={{ width: 24, height: 24, background: '#fff', borderRadius: 12, borderTopLeftRadius: 0 }} /> Nova
           </div>
         </div>
       </div>
 
-      {/* ════ MARQUEE ════════════════════════════════════════════════════════════ */}
-      <div
-        style={{
-          borderTop: '1px solid rgba(126,211,72,0.3)',
-          borderBottom: '1px solid rgba(126,211,72,0.3)',
-          background: 'rgba(126,211,72,0.04)',
-          padding: '14px 0',
-          overflow: 'hidden',
-        }}
-      >
-        <div className="animate-marquee">
-          {[...marqueeItems, ...marqueeItems].map((item, i) => (
-            <span
-              key={i}
-              style={{
-                whiteSpace: 'nowrap',
-                padding: '0 32px',
-                fontSize: 14,
-                fontWeight: 600,
-                fontFamily: "'Outfit', sans-serif",
-                color: i % 2 === 0 ? '#7ed348' : 'rgba(255,255,255,0.6)',
-                letterSpacing: '0.05em',
-                textTransform: 'uppercase',
-              }}
-            >
-              {item} {i < marqueeItems.length * 2 - 1 && <span style={{ color: 'rgba(126,211,72,0.4)', marginLeft: 16 }}>•</span>}
-            </span>
-          ))}
+      {/* ════ SIMPLIFIED CATEGORIES ═══════════════════════════════════════════ */}
+      <Section id="categories" style={{ padding: 'clamp(60px,8vw,100px) 5%', background: '#000' }}>
+        <div style={{ textAlign: 'center', maxWidth: 600, margin: '0 auto 60px' }}>
+          <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px, 6vw, 64px)', margin: '0 0 16px' }}>Browse <span style={{ color: '#7ed348' }}>talent</span> by category</h2>
+          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16 }}>From quick data-entry to complex web development, find the exact skill you need.</p>
         </div>
-      </div>
 
-      {/* ════ HOW IT WORKS ════════════════════════════════════════════════════ */}
-      <Section id="how" style={{ padding: 'clamp(60px,8vw,100px) 5%' }}>
-        <div style={{ textAlign: 'center', marginBottom: 60 }}>
-          <p style={{ color: '#7ed348', fontSize: 13, fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 12 }}>How It Works</p>
-          <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px, 6vw, 72px)', margin: 0 }}>Simple. Powerful. Fair.</h2>
-          <p style={{ color: 'rgba(255,255,255,0.55)', marginTop: 16, maxWidth: 480, margin: '16px auto 0', fontSize: 16, lineHeight: 1.6 }}>
-            Four steps to go from zero to earning — or from idea to completed task.
-          </p>
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 24, maxWidth: 960, margin: '0 auto' }}>
-          {steps.map((step, i) => (
-            <div
-              key={i}
-              style={{
-                background: '#111',
-                border: '1px solid rgba(255,255,255,0.07)',
-                borderRadius: 16,
-                padding: '36px 28px',
-                position: 'relative',
-                overflow: 'hidden',
-                transition: 'transform 0.25s, border-color 0.25s, box-shadow 0.25s',
-                cursor: 'default',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-6px)';
-                e.currentTarget.style.borderColor = 'rgba(126,211,72,0.35)';
-                e.currentTarget.style.boxShadow = '0 16px 40px rgba(0,0,0,0.4)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)';
-                e.currentTarget.style.boxShadow = 'none';
-              }}
-            >
-              {/* Faded step number */}
-              <div style={{ position: 'absolute', top: -10, right: 20, fontFamily: "'Bebas Neue',sans-serif", fontSize: 100, color: 'rgba(255,255,255,0.04)', lineHeight: 1, userSelect: 'none' }}>
-                {step.num}
-              </div>
-              <div style={{ fontSize: 32, marginBottom: 16, background: i % 2 === 0 ? 'rgba(126,211,72,0.1)' : 'rgba(201,168,76,0.1)', width: 56, height: 56, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                {step.icon}
-              </div>
-              <h3 style={{ fontFamily: "'Outfit',sans-serif", fontWeight: 700, fontSize: 18, margin: '0 0 10px' }}>{step.title}</h3>
-              <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 15, lineHeight: 1.6, margin: 0 }}>{step.desc}</p>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* ════ WHO IT'S FOR ════════════════════════════════════════════════════ */}
-      <Section style={{ padding: 'clamp(60px,8vw,100px) 5%', background: '#0a0a0a' }}>
-        <div style={{ textAlign: 'center', marginBottom: 60 }}>
-          <p style={{ color: '#7ed348', fontSize: 13, fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 12 }}>Who It&apos;s For</p>
-          <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px, 6vw, 72px)', margin: 0 }}>Built for Both Sides.</h2>
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))', gap: 28, maxWidth: 900, margin: '0 auto' }}>
-          {/* Worker Card */}
-          <div
-            style={{
-              background: 'rgba(45,122,45,0.08)',
-              border: '1px solid rgba(126,211,72,0.25)',
-              borderRadius: 20,
-              padding: '40px 32px',
-              position: 'relative',
-              transition: 'transform 0.25s, box-shadow 0.25s',
-              overflow: 'hidden',
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 20px 50px rgba(126,211,72,0.1)'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
-          >
-            <div style={{ position: 'absolute', bottom: -60, right: -60, width: 200, height: 200, borderRadius: '50%', background: 'radial-gradient(circle, rgba(126,211,72,0.12) 0%, transparent 70%)' }} />
-            <div style={{ fontSize: 40, marginBottom: 16 }}>💪</div>
-            <h3 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: 28, letterSpacing: '0.05em', color: '#7ed348', margin: '0 0 6px' }}>Task Workers</h3>
-            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 14, margin: '0 0 24px' }}>Earners & Freelancers</p>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
-              {workerBenefits.map((b, i) => (
-                <li key={i} style={{ display: 'flex', gap: 10, fontSize: 15, color: 'rgba(255,255,255,0.75)', alignItems: 'flex-start' }}>
-                  <span style={{ color: '#7ed348', fontWeight: 700, flexShrink: 0, marginTop: 1 }}>✦</span> {b}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Creator Card */}
-          <div
-            style={{
-              background: 'rgba(201,168,76,0.06)',
-              border: '1px solid rgba(201,168,76,0.25)',
-              borderRadius: 20,
-              padding: '40px 32px',
-              position: 'relative',
-              transition: 'transform 0.25s, box-shadow 0.25s',
-              overflow: 'hidden',
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 20px 50px rgba(201,168,76,0.1)'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
-          >
-            <div style={{ position: 'absolute', bottom: -60, left: -60, width: 200, height: 200, borderRadius: '50%', background: 'radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%)' }} />
-            <div style={{ fontSize: 40, marginBottom: 16 }}>🚀</div>
-            <h3 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: 28, letterSpacing: '0.05em', color: '#c9a84c', margin: '0 0 6px' }}>Task Creators</h3>
-            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 14, margin: '0 0 24px' }}>Businesses & Individuals</p>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
-              {creatorBenefits.map((b, i) => (
-                <li key={i} style={{ display: 'flex', gap: 10, fontSize: 15, color: 'rgba(255,255,255,0.75)', alignItems: 'flex-start' }}>
-                  <span style={{ color: '#c9a84c', fontWeight: 700, flexShrink: 0, marginTop: 1 }}>✦</span> {b}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </Section>
-
-      {/* ════ FEATURES ════════════════════════════════════════════════════════ */}
-      <Section id="features" style={{ padding: 'clamp(60px,8vw,100px) 5%' }}>
-        <div style={{ textAlign: 'center', marginBottom: 60 }}>
-          <p style={{ color: '#7ed348', fontSize: 13, fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 12 }}>Platform Features</p>
-          <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px, 6vw, 72px)', margin: 0 }}>Built to be trusted.</h2>
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: 20, maxWidth: 1100, margin: '0 auto' }}>
-          {features.map((f, i) => (
-            <div
-              key={i}
-              style={{
-                background: '#111',
-                border: '1px solid rgba(255,255,255,0.07)',
-                borderRadius: 14,
-                padding: '28px 24px',
-                transition: 'transform 0.25s, border-color 0.25s',
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'rgba(126,211,72,0.3)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'; }}
-            >
-              <div style={{ fontSize: 30, marginBottom: 14 }}>{f.icon}</div>
-              <h3 style={{ fontFamily: "'Outfit',sans-serif", fontWeight: 700, fontSize: 16, margin: '0 0 8px' }}>{f.title}</h3>
-              <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 14, lineHeight: 1.6, margin: 0 }}>{f.desc}</p>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* ════ CATEGORIES ══════════════════════════════════════════════════════ */}
-      <Section id="categories" style={{ padding: 'clamp(60px,8vw,100px) 5%', background: '#0a0a0a' }}>
-        <div style={{ textAlign: 'center', marginBottom: 48 }}>
-          <p style={{ color: '#7ed348', fontSize: 13, fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 12 }}>Task Categories</p>
-          <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px, 6vw, 72px)', margin: 0 }}>Whatever you need. We&rsquo;ve got it.</h2>
-        </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center', maxWidth: 700, margin: '0 auto' }}>
-          {categories.map((cat, i) => (
-            <div
-              key={i}
-              style={{
-                background: '#111',
-                border: '1px solid rgba(255,255,255,0.1)',
-                borderRadius: 50,
-                padding: '12px 24px',
-                fontSize: 15,
-                fontWeight: 500,
-                cursor: 'pointer',
-                transition: 'background 0.2s, border-color 0.2s, color 0.2s',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8,
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(126,211,72,0.08)'; e.currentTarget.style.borderColor = '#7ed348'; e.currentTarget.style.color = '#7ed348'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = '#111'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = '#fff'; }}
-            >
-              <span>{cat.icon}</span> {cat.label}
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* ════ LIVE STATS ══════════════════════════════════════════════════════ */}
-      <Section style={{ padding: 'clamp(60px,8vw,100px) 5%', background: '#111' }}>
-        <div style={{ textAlign: 'center', marginBottom: 60 }}>
-          <p style={{ color: '#7ed348', fontSize: 13, fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 12 }}>Live Platform Stats</p>
-          <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px, 6vw, 72px)', margin: 0 }}>Real numbers. Real people.</h2>
-          <p style={{ color: 'rgba(255,255,255,0.5)', marginTop: 12, fontSize: 16 }}>Updated in real time from our platform.</p>
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))', gap: 24, maxWidth: 860, margin: '0 auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 20, maxWidth: 1100, margin: '0 auto' }}>
           {[
-            { icon: '👥', label: 'Total Users', value: stats.totalUsers || 0, color: '#7ed348', suffix: '+' },
-            { icon: '✅', label: 'Tasks Completed', value: stats.completedTasks || 0, color: '#c9a84c', suffix: '+' },
-            { icon: '📋', label: 'Tasks Available', value: stats.openTasks || 0, color: '#fff', suffix: '' },
-          ].map((stat, i) => (
-            <div
-              key={i}
-              style={{
-                background: '#0a0a0a',
-                border: '1px solid rgba(255,255,255,0.07)',
-                borderRadius: 20,
-                padding: '40px 28px',
-                textAlign: 'center',
-                transition: 'border-color 0.25s, box-shadow 0.25s',
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(126,211,72,0.3)'; e.currentTarget.style.boxShadow = '0 0 30px rgba(126,211,72,0.08)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'; e.currentTarget.style.boxShadow = 'none'; }}
-            >
-              <div style={{ fontSize: 32, marginBottom: 16 }}>{stat.icon}</div>
-              <div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: 80, lineHeight: 1, color: stat.color }}>
-                <AnimatedCounter target={stat.value} suffix={stat.suffix} />
+            { title: 'Development & IT', icon: '💻', img: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&q=80' },
+            { title: 'Design & Creative', icon: '🎨', img: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=500&q=80' },
+            { title: 'Digital Marketing', icon: '📈', img: 'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=500&q=80' },
+            { title: 'Writing & Translation', icon: '✍️', img: 'https://images.unsplash.com/photo-1455390582262-044cdead27d8?w=500&q=80' },
+          ].map((cat, i) => (
+            <div key={i} style={{ position: 'relative', height: 200, borderRadius: 20, overflow: 'hidden', cursor: 'pointer', group: 'true' }}>
+              {/* Background Image */}
+              <img src={cat.img} alt={cat.title} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.4, transition: 'opacity 0.3s, transform 0.5s' }} onMouseEnter={e => { e.currentTarget.style.opacity = '0.6'; e.currentTarget.style.transform = 'scale(1.05)'; }} onMouseLeave={e => { e.currentTarget.style.opacity = '0.4'; e.currentTarget.style.transform = 'scale(1)'; }} />
+              {/* Overlay */}
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #000 10%, transparent 80%)', pointerEvents: 'none' }} />
+              {/* Content */}
+              <div style={{ position: 'absolute', bottom: 24, left: 24, right: 24, pointerEvents: 'none' }}>
+                <div style={{ fontSize: 24, marginBottom: 8 }}>{cat.icon}</div>
+                <h3 style={{ fontFamily: "'Outfit',sans-serif", fontWeight: 700, fontSize: 18, color: '#fff', margin: 0 }}>{cat.title}</h3>
               </div>
-              <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.55)', marginTop: 8, fontWeight: 500 }}>{stat.label}</p>
             </div>
           ))}
         </div>
       </Section>
 
-      {/* ════ HOW PAYMENT WORKS ═══════════════════════════════════════════════ */}
-      <Section style={{ padding: 'clamp(60px,8vw,100px) 5%' }}>
-        <div style={{ textAlign: 'center', marginBottom: 60 }}>
-          <p style={{ color: '#7ed348', fontSize: 13, fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 12 }}>Payments & Security</p>
-          <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px, 6vw, 72px)', margin: 0 }}>Your money. Your terms.</h2>
-        </div>
+      {/* ════ VALUE PROP (HUMAN + BULLETS) ════════════════════════════════════ */}
+      <Section id="how" style={{ padding: 'clamp(60px,8vw,100px) 5%', background: '#0a0a0a' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 60, alignItems: 'center' }}>
+          
+          {/* Left: Value Image */}
+          <div style={{ position: 'relative' }}>
+            <div style={{ position: 'absolute', inset: -20, background: 'rgba(126,211,72,0.1)', borderRadius: 30, transform: 'rotate(-3deg)' }} />
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1000&q=80" alt="Platform Benefits" style={{ width: '100%', borderRadius: 24, position: 'relative', zIndex: 1, boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }} />
+          </div>
 
-        {/* Payment Flow */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap', gap: 0, maxWidth: 900, margin: '0 auto 60px' }}>
-          {paymentSteps.map((step, i) => (
-            <div key={i} style={{ display: 'flex', alignItems: 'center' }}>
-              <div style={{ textAlign: 'center', padding: '0 8px' }}>
-                <div style={{ background: '#111', border: '1px solid rgba(126,211,72,0.25)', borderRadius: 14, padding: '20px 16px', minWidth: 110 }}>
-                  <div style={{ fontSize: 28, marginBottom: 8 }}>{step.icon}</div>
-                  <div style={{ fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.75)', fontFamily: "'Outfit',sans-serif" }}>{step.label}</div>
+          {/* Right: Focused Bullets */}
+          <div>
+            <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px, 5vw, 64px)', margin: '0 0 32px', lineHeight: 1.1 }}>
+              Why choose <span style={{ color: '#c9a84c' }}>SelfPaid</span>?
+            </h2>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+              {[
+                { title: 'Proof-of-Work Required', desc: 'No more paying for uncompleted tasks. Every submission requires verifiable proof before you unfreeze escrow.' },
+                { title: 'Global Escrow Protection', desc: 'Money is held securely in the middle. The creator is protected from bad work, and the worker is protected from non-payment.' },
+                { title: 'Instant Withdrawals', desc: 'Once a task is approved, funds are immediately credited to the worker\'s digital wallet. No waiting 14 days.' }
+              ].map((val, i) => (
+                <div key={i}>
+                  <h3 style={{ fontFamily: "'Outfit',sans-serif", fontWeight: 700, fontSize: 18, margin: '0 0 8px', display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <span style={{ color: '#7ed348' }}>✓</span> {val.title}
+                  </h3>
+                  <p style={{ color: 'rgba(255,255,255,0.5)', margin: 0, lineHeight: 1.6, fontSize: 15 }}>{val.desc}</p>
                 </div>
-              </div>
-              {i < paymentSteps.length - 1 && (
-                <div style={{ color: '#7ed348', fontSize: 24, margin: '0 4px', flexShrink: 0 }}>→</div>
-              )}
+              ))}
             </div>
-          ))}
-        </div>
+            <button onClick={() => navigate('/register')} style={{ marginTop: 40, background: 'transparent', color: '#fff', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 50, padding: '12px 28px', fontFamily: "'Outfit',sans-serif", fontWeight: 600, fontSize: 14, cursor: 'pointer' }}>
+              Learn How It Works →
+            </button>
+          </div>
 
-        {/* Trust Cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: 20, maxWidth: 720, margin: '0 auto' }}>
-          {[
-            { icon: '🔒', title: 'Funds always protected', desc: 'Money never moves until both parties agree.' },
-            { icon: '⚖️', title: 'Fair for both sides', desc: 'Our dispute system listens to everyone.' },
-            { icon: '👁️', title: 'Full transparency', desc: 'Every transaction is tracked and visible to you.' },
-          ].map((t, i) => (
-            <div key={i} style={{ background: '#111', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 14, padding: '28px 24px', textAlign: 'center' }}>
-              <div style={{ fontSize: 32, marginBottom: 12 }}>{t.icon}</div>
-              <h3 style={{ fontFamily: "'Outfit',sans-serif", fontWeight: 700, fontSize: 16, margin: '0 0 8px' }}>{t.title}</h3>
-              <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 14, margin: 0, lineHeight: 1.6 }}>{t.desc}</p>
+        </div>
+      </Section>
+
+      {/* ════ HUMAN TESTIMONIAL ═══════════════════════════════════════════════ */}
+      <Section style={{ padding: 'clamp(60px,8vw,100px) 5%', background: '#000' }}>
+        <div style={{ maxWidth: 800, margin: '0 auto', textAlign: 'center', background: 'linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 32, padding: 'clamp(40px, 6vw, 60px)' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 4, marginBottom: 24, fontSize: 18 }}>
+            ⭐ ⭐ ⭐ ⭐ ⭐
+          </div>
+          <h3 style={{ fontFamily: "'Outfit',sans-serif", fontWeight: 500, fontSize: 'clamp(20px, 3vw, 28px)', color: '#fff', lineHeight: 1.5, margin: '0 0 32px' }}>
+             "As a remote developer, finding trustworthy clients used to be a nightmare. SelfPaid's escrow system guarantees I get paid the second my code is approved. I'll never go back."
+          </h3>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16 }}>
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" alt="David M." style={{ width: 56, height: 56, borderRadius: '50%', objectFit: 'cover' }} />
+            <div style={{ textAlign: 'left' }}>
+              <div style={{ fontFamily: "'Outfit',sans-serif", fontWeight: 700, fontSize: 16 }}>Marcus T.</div>
+              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)' }}>Senior Web Developer</div>
             </div>
-          ))}
+          </div>
         </div>
       </Section>
 
