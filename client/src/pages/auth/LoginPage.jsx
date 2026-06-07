@@ -51,10 +51,6 @@ const LoginPage = () => {
     flex: '1 1 0',
     background: 'rgba(45,122,45,0.08)',
     borderRight: '1px solid rgba(126,211,72,0.12)',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
     padding: '60px 40px',
     position: 'relative',
     overflow: 'hidden',
@@ -79,7 +75,7 @@ const LoginPage = () => {
   return (
     <div style={{ minHeight: '100vh', background: '#000', display: 'flex' }}>
       {/* Left Decorative Panel */}
-      <div className="hidden md:flex" style={panelStyle}>
+      <div className="hidden md:flex flex-col items-center justify-center" style={panelStyle}>
         <div style={{ position: 'absolute', top: '30%', left: '50%', transform: 'translate(-50%,-50%)', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(126,211,72,0.1) 0%, transparent 70%)', pointerEvents: 'none' }} />
         <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', maxWidth: 400 }}>
           <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: 'clamp(36px,5vw,60px)', lineHeight: 1.05, margin: '0 0 32px', color: '#fff' }}>

@@ -105,7 +105,7 @@ const RegisterPage = () => {
   return (
     <div style={{ minHeight: '100vh', background: '#000', display: 'flex' }}>
       {/* Decorative Left Panel */}
-      <div className="hidden md:flex" style={{ flex: '1 1 0', background: 'rgba(45,122,45,0.06)', borderRight: '1px solid rgba(126,211,72,0.1)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '60px 40px', position: 'relative', overflow: 'hidden' }}>
+      <div className="hidden md:flex flex-col items-center justify-center" style={{ flex: '1 1 0', background: 'rgba(45,122,45,0.06)', borderRight: '1px solid rgba(126,211,72,0.1)', padding: '60px 40px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', top: '30%', left: '50%', transform: 'translate(-50%,-50%)', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(126,211,72,0.1) 0%, transparent 70%)', pointerEvents: 'none' }} />
         <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', maxWidth: 380 }}>
           <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: 'clamp(30px,4vw,52px)', lineHeight: 1.1, margin: '0 0 28px', color: '#fff' }}>
