@@ -1,9 +1,12 @@
-import api from './axios.js';
+import api from "./axios.js";
 
-export const loginUser = (data) => api.post('/auth/login', data);
-export const registerUser = (data) => api.post('/auth/register', data);
-export const forgotPassword = (data) => api.post('/auth/forgot-password', data);
-export const resetPassword = (token, data) => api.patch(`/auth/reset-password/${token}`, data);
-export const getMe = () => api.get('/auth/me');
-export const logoutUser = () => api.post('/auth/logout');
-export const getPublicStats = () => api.get('/public/stats');
+export const loginUser = (data) => api.post("/auth/login", data);
+export const registerUser = (data) => api.post("/auth/register", data);
+export const forgotPassword = (data) => api.post("/auth/forgot-password", data);
+export const resetPassword = (token, data) =>
+  api.patch(`/auth/reset-password/${token}`, data);
+export const getMe = () => api.get("/auth/me");
+export const logoutUser = () => api.post("/auth/logout");
+export const getPublicStats = () => api.get("/public/stats");
+export const verifyOTP = (data) => api.post("/auth/verify-otp", data);
+export const resendOTP = (data) => api.post("/auth/resend-otp", data);

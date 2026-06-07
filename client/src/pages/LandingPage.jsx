@@ -600,6 +600,104 @@ const LandingPage = () => {
         </div>
       </Section>
 
+      {/* ════ SPX TOKEN ═══════════════════════════════════════════════════════ */}
+      <Section id="spx" style={{ padding: 'clamp(60px,8vw,100px) 5%', background: '#0a0a0a', position: 'relative', overflow: 'hidden' }}>
+        {/* Gold glow */}
+        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 800, height: 800, borderRadius: '50%', background: 'radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 65%)', pointerEvents: 'none' }} />
+
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          {/* Header */}
+          <div style={{ textAlign: 'center', marginBottom: 60 }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: 'linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05))', border: '1px solid rgba(201,168,76,0.4)', borderRadius: 50, padding: '7px 20px', marginBottom: 20 }}>
+              <span style={{ fontSize: 18 }}>🪙</span>
+              <span style={{ fontFamily: "'Outfit',sans-serif", fontWeight: 700, fontSize: 13, letterSpacing: '0.15em', color: '#c9a84c', textTransform: 'uppercase' }}>Introducing $SPX Token</span>
+            </div>
+            <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px, 6vw, 72px)', margin: '0 0 16px', lineHeight: 1 }}>
+              Earn While You{' '}
+              <span style={{ background: 'linear-gradient(135deg, #c9a84c, #eab308)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Work.</span>
+            </h2>
+            <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 'clamp(15px, 1.5vw, 17px)', maxWidth: 560, margin: '0 auto', lineHeight: 1.7 }}>
+              Every completed task earns you <strong style={{ color: '#c9a84c' }}>+50 SPX tokens</strong> — SelfPaid&apos;s native reward currency. Use them for exclusive perks, raffles, and future platform privileges. It&apos;s completely free and automatic.
+            </p>
+          </div>
+
+          {/* Main two-column layout */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px,1fr))', gap: 28, maxWidth: 1000, margin: '0 auto 48px' }}>
+            {/* Left: Token Card */}
+            <div style={{ background: 'linear-gradient(135deg, rgba(201,168,76,0.1), rgba(201,168,76,0.03))', border: '1px solid rgba(201,168,76,0.35)', borderRadius: 24, padding: '40px 32px', position: 'relative', overflow: 'hidden' }}>
+              <div style={{ position: 'absolute', top: -40, right: -40, width: 180, height: 180, borderRadius: '50%', background: 'radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%)' }} />
+              <div style={{ fontSize: 64, marginBottom: 20, filter: 'drop-shadow(0 0 20px rgba(201,168,76,0.5))' }}>🪙</div>
+              <div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: 52, color: '#c9a84c', lineHeight: 1, marginBottom: 4 }}>$SPX</div>
+              <div style={{ fontFamily: "'Outfit',sans-serif", fontWeight: 600, fontSize: 15, color: 'rgba(255,255,255,0.7)', marginBottom: 24 }}>SelfPaid Token</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                {[
+                  { label: 'Earn Rate', value: '+50 SPX per task' },
+                  { label: 'Withdrawal', value: 'Not yet (coming soon)' },
+                  { label: 'Type', value: 'Platform Reward Token' },
+                  { label: 'Cost to earn', value: 'Absolutely free' },
+                ].map((row) => (
+                  <div key={row.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: '1px solid rgba(201,168,76,0.1)' }}>
+                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', fontWeight: 500 }}>{row.label}</span>
+                    <span style={{ fontSize: 14, color: '#c9a84c', fontWeight: 700 }}>{row.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: Perks Grid */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              {[
+                { icon: '🎟️', title: 'Weekly Cash Raffle', desc: 'Spend 50 SPX for a ticket in the weekly $50 cash draw. Winners paid directly to their SelfPaid wallet every Friday.' },
+                { icon: '🏆', title: 'Gold Tier Status', desc: 'Hold 1,000+ SPX to unlock your Gold Tier badge — visible on your profile to attract better-paying task creators.' },
+                { icon: '🔓', title: 'Elite Tasks Access', desc: 'Accumulate 1,000 SPX to unlock a hidden tier of premium, high-paying tasks not visible to standard workers.' },
+                { icon: '🚀', title: 'Future Utility', desc: 'As SelfPaid grows, $SPX will gain real-world value through exchange listings, creator boosts, and more.' },
+              ].map((perk) => (
+                <div
+                  key={perk.title}
+                  style={{ background: '#111', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, padding: '20px 22px', display: 'flex', gap: 16, alignItems: 'flex-start', transition: 'border-color 0.2s, transform 0.2s' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(201,168,76,0.3)'; e.currentTarget.style.transform = 'translateX(4px)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'; e.currentTarget.style.transform = 'translateX(0)'; }}
+                >
+                  <div style={{ fontSize: 28, flexShrink: 0, width: 50, height: 50, background: 'rgba(201,168,76,0.1)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{perk.icon}</div>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 5 }}>{perk.title}</div>
+                    <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', lineHeight: 1.6 }}>{perk.desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* How you earn banner */}
+          <div style={{ maxWidth: 1000, margin: '0 auto', background: 'rgba(201,168,76,0.05)', border: '1px solid rgba(201,168,76,0.2)', borderRadius: 20, padding: '28px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 20 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap' }}>
+              {[
+                { icon: '📝', label: 'Apply for a Task' },
+                { icon: '⚒️', label: 'Complete the Work' },
+                { icon: '✅', label: 'Creator Approves' },
+                { icon: '🪙', label: '+50 SPX Earned!' },
+              ].map((step, i, arr) => (
+                <div key={step.label} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: 24, marginBottom: 4 }}>{step.icon}</div>
+                    <div style={{ fontSize: 12, fontWeight: 600, color: i === arr.length - 1 ? '#c9a84c' : 'rgba(255,255,255,0.6)', whiteSpace: 'nowrap' }}>{step.label}</div>
+                  </div>
+                  {i < arr.length - 1 && <span style={{ color: 'rgba(201,168,76,0.4)', fontSize: 20, flexShrink: 0 }}>→</span>}
+                </div>
+              ))}
+            </div>
+            <button
+              onClick={() => navigate('/register')}
+              style={{ background: 'linear-gradient(135deg,#c9a84c,#eab308)', border: 'none', borderRadius: 50, padding: '13px 30px', color: '#000', fontFamily: "'Outfit',sans-serif", fontWeight: 700, fontSize: 14, cursor: 'pointer', whiteSpace: 'nowrap', boxShadow: '0 0 24px rgba(201,168,76,0.3)', transition: 'transform 0.2s, box-shadow 0.2s' }}
+              onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 0 36px rgba(201,168,76,0.5)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 0 24px rgba(201,168,76,0.3)'; }}
+            >
+              Start Earning SPX Free →
+            </button>
+          </div>
+        </div>
+      </Section>
+
       {/* ════ CTA BANNER ══════════════════════════════════════════════════════ */}
       <Section style={{ padding: 'clamp(80px,10vw,120px) 5%', background: '#0a0a0a', position: 'relative', overflow: 'hidden', textAlign: 'center' }}>
         <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 600, height: 600, borderRadius: '50%', background: 'radial-gradient(circle, rgba(126,211,72,0.1) 0%, transparent 70%)', pointerEvents: 'none' }} className="animate-glow" />

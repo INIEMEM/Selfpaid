@@ -71,9 +71,13 @@ const RegisterPage = () => {
     setServerError('');
     try {
       const res = await registerUser(data);
-      const { user, accessToken } = res.data;
-      auth.login(user, accessToken);
-      navigate(getDashboardPath(user.role), { replace: true });
+      const { user } = res.data;
+      navigate('/verify-email', {
+        state: {
+          email: data.email,
+          role: user.role
+        }
+      });
     } catch (err) {
       setServerError(err?.response?.data?.message || 'Registration failed. Please try again.');
     }

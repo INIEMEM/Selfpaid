@@ -215,6 +215,8 @@ const reviewSubmission = async (req, res, next) => {
       const creator = await User.findById(req.user.id);
 
       worker.walletBalance += workerPayout;
+      // SPX Engagement Reward
+      worker.tokenBalance = (worker.tokenBalance || 0) + 50;
       creator.escrowBalance -= task.reward;
 
       task.status = "completed";

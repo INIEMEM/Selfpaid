@@ -1,7 +1,17 @@
 const { PutObjectCommand, DeleteObjectCommand } = require("@aws-sdk/client-s3");
 const { Upload } = require("@aws-sdk/lib-storage");
-const { v4: uuid } = require("uuid");
 const getS3Client = require("../config/s3");
+
+let uuidV4;
+
+const getUuidV4 = async () => {
+  if (!uuidV4) {
+    const uuid = await import("uuid");
+    uuidV4 = uuid.v4;
+  }
+
+  return uuidV4;
+};
 
 const getMimeExtension = (mimetype) => {
   const map = {
@@ -16,6 +26,7 @@ const uploadToS3 = async ({ buffer, mimetype, folder }) => {
   const bucket = process.env.AWS_S3_BUCKET;
   const region = process.env.AWS_REGION;
   const ext = getMimeExtension(mimetype);
+  const uuid = await getUuidV4();
   const filename = `${uuid()}-${Date.now()}`;
   const key = `${folder}/${filename}.${ext}`;
 

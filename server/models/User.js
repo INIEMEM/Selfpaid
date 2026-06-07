@@ -37,6 +37,7 @@ const userSchema = new mongoose.Schema(
     averageRating: { type: Number, default: 0 },
     walletBalance: { type: Number, default: 0 },
     escrowBalance: { type: Number, default: 0 },
+    tokenBalance: { type: Number, default: 0 },
   },
   { timestamps: true }
 );

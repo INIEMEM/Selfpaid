@@ -231,6 +231,17 @@ const BrowseTasksPage = () => {
           <ChevronDown size={13} style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.4)', pointerEvents: 'none' }} />
         </div>
 
+        {/* Elite Tasks Locked Filter */}
+        <button
+          className="elite-filter-btn"
+          onClick={() => {
+            toast('Unlocking Elite Tasks requires 1,000 SPX tokens. Get to work!', 'error');
+          }}
+          style={{ background: 'linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05))', border: '1px solid #c9a84c', borderRadius: 8, padding: '8px 14px', color: '#c9a84c', fontSize: 13, fontFamily: "'Outfit',sans-serif", fontWeight: 600, display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', transition: 'all 0.2s' }}
+        >
+          🔒 Elite Tasks (1k+ SPX)
+        </button>
+
         {/* Min/Max */}
         <input type="number" value={minReward} onChange={(e) => { setMinReward(e.target.value); setPage(1); setAllTasks([]); }} placeholder="Min $" style={{ ...inputStyle, width: 80 }} />
         <input type="number" value={maxReward} onChange={(e) => { setMaxReward(e.target.value); setPage(1); setAllTasks([]); }} placeholder="Max $" style={{ ...inputStyle, width: 80 }} />

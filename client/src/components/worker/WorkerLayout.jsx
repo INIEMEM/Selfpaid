@@ -12,6 +12,7 @@ import {
   getNotifications,
   markAllNotificationsRead,
   markNotificationRead,
+  getWalletBalance,
 } from '../../api/worker.js';
 
 const navLinks = [
@@ -62,6 +63,12 @@ const WorkerLayout = ({ children, pageTitle = '' }) => {
     },
     refetchInterval: 30000,
   });
+
+  const { data: balanceData } = useQuery({
+    queryKey: ['wallet-balance'],
+    queryFn: async () => (await getWalletBalance()).data,
+  });
+  const spxBalance = balanceData?.wallet?.tokenBalance || 0;
 
   const unreadCount = notifData?.unreadCount || 0;
   const recentNotifs = notifData?.notifications || [];
@@ -252,6 +259,27 @@ const WorkerLayout = ({ children, pageTitle = '' }) => {
 
           {/* Right side */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            {/* SPX Token Badge */}
+            <div
+              title="SelfPaid Tokens (SPX)"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 6,
+                background: 'linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05))',
+                border: '1px solid rgba(201,168,76,0.3)',
+                borderRadius: 20,
+                padding: '4px 10px',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+              }}
+              onClick={() => navigate('/worker/wallet')}
+              onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.05)'; e.currentTarget.style.borderColor = '#c9a84c'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.borderColor = 'rgba(201,168,76,0.3)'; }}
+            >
+              <span style={{ fontSize: 14 }}>🪙</span>
+              <span style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: 16, color: '#c9a84c', marginTop: 2 }}>{spxBalance} SPX</span>
+            </div>
             {/* Notification Bell */}
             <div ref={notifRef} style={{ position: 'relative' }}>
               <button

@@ -3,7 +3,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Wallet, Lock, TrendingUp } from 'lucide-react';
+import { Wallet, Lock, TrendingUp, Trophy } from 'lucide-react';
 import WorkerLayout from '../../components/worker/WorkerLayout.jsx';
 import { useToast } from '../../components/shared/Toast.jsx';
 import {
@@ -118,15 +118,20 @@ const WalletPage = () => {
           { icon: Wallet, label: 'Available Balance', value: fmt(walBalance), color: '#7ed348' },
           { icon: Lock, label: 'In Escrow', value: fmt(escBalance), color: '#c9a84c' },
           { icon: TrendingUp, label: 'Total Earned', value: fmt(totalEarned), color: '#fff' },
-        ].map(({ icon: Icon, label, value, color }) => (
-          <div key={label} style={{ background: '#111', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 16, padding: '22px 20px' }}>
+          { icon: Trophy, label: 'SPX Tokens', value: String(balanceData?.tokenBalance || 0), color: '#c9a84c', sub: 'Future utility tokens' },
+        ].map(({ icon: Icon, label, value, color, sub }) => (
+          <div key={label} style={{ background: '#111', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 16, padding: '22px 20px', position: 'relative', overflow: 'hidden' }}>
             <div style={{ width: 38, height: 38, borderRadius: 10, background: `${color}18`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 14 }}>
               <Icon size={18} style={{ color }} />
             </div>
             {balLoading ? <div style={{ height: 30, width: '60%', borderRadius: 6, background: 'rgba(255,255,255,0.06)', animation: 'pulse 1.5s ease-in-out infinite' }} /> : (
-              <div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: 30, color, lineHeight: 1 }}>{value}</div>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
+                <div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: 30, color, lineHeight: 1 }}>{value}</div>
+                {label === 'SPX Tokens' && <span style={{ fontSize: 13, color: color, fontWeight: 700 }}>SPX</span>}
+              </div>
             )}
             <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', marginTop: 4 }}>{label}</div>
+            {sub && <div style={{ fontSize: 11, color: color, marginTop: 4, fontWeight: 600 }}>{sub}</div>}
           </div>
         ))}
       </div>

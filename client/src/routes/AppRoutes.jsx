@@ -6,6 +6,7 @@ import { useAuth } from "../context/AuthContext";
 import LandingPage from "../pages/LandingPage";
 import LoginPage from "../pages/auth/LoginPage";
 import RegisterPage from "../pages/auth/RegisterPage";
+import VerifyEmailPage from "../pages/auth/VerifyEmailPage";
 import ForgotPasswordPage from "../pages/auth/ForgotPasswordPage";
 import ResetPasswordPage from "../pages/auth/ResetPasswordPage";
 
@@ -17,6 +18,12 @@ import WalletPage from "../pages/worker/WalletPage";
 import NotificationsPage from "../pages/worker/NotificationsPage";
 import RatingsPage from "../pages/worker/RatingsPage";
 import ProfilePage from "../pages/worker/ProfilePage";
+
+// Creator Pages
+import CreatorDashboard from "../pages/creator/CreatorDashboard";
+import CreateTaskPage from "../pages/creator/CreateTaskPage";
+import CreatorTasksPage from "../pages/creator/CreatorTasksPage";
+import CreatorWalletPage from "../pages/creator/CreatorWalletPage";
 
 
 // ─── Full-screen Loader ────────────────────────────────────────────────────────
@@ -63,6 +70,7 @@ const AppRoutes = () => {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/verify-email" element={<VerifyEmailPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
 
@@ -76,10 +84,10 @@ const AppRoutes = () => {
         <Route path="/worker/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
 
         {/* Creator Routes */}
-        <Route path="/creator/dashboard" element={<ProtectedRoute><Placeholder label="Creator Dashboard — Coming Soon" /></ProtectedRoute>} />
-        <Route path="/creator/tasks/create" element={<ProtectedRoute><Placeholder label="Create Task" /></ProtectedRoute>} />
-        <Route path="/creator/tasks" element={<ProtectedRoute><Placeholder label="Creator Tasks" /></ProtectedRoute>} />
-        <Route path="/creator/wallet" element={<ProtectedRoute><Placeholder label="Creator Wallet" /></ProtectedRoute>} />
+        <Route path="/creator/dashboard" element={<ProtectedRoute><CreatorDashboard /></ProtectedRoute>} />
+        <Route path="/creator/tasks/create" element={<ProtectedRoute><CreateTaskPage /></ProtectedRoute>} />
+        <Route path="/creator/tasks" element={<ProtectedRoute><CreatorTasksPage /></ProtectedRoute>} />
+        <Route path="/creator/wallet" element={<ProtectedRoute><CreatorWalletPage /></ProtectedRoute>} />
 
         {/* Admin Routes */}
         <Route path="/admin/dashboard" element={<RoleRoute role="admin"><Placeholder label="Admin Dashboard — Coming Soon" /></RoleRoute>} />

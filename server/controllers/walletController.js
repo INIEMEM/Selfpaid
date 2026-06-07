@@ -10,7 +10,7 @@ const paystackClient = require("../config/paystack");
 
 const getWalletBalance = async (req, res, next) => {
   try {
-    const user = await User.findById(req.user.id).select("walletBalance escrowBalance firstName lastName");
+    const user = await User.findById(req.user.id).select("walletBalance escrowBalance tokenBalance firstName lastName");
     if (!user) return res.status(404).json({ success: false, message: "User not found" });
 
     return res.status(200).json({
@@ -18,6 +18,7 @@ const getWalletBalance = async (req, res, next) => {
       wallet: {
         available: user.walletBalance,
         inEscrow: user.escrowBalance,
+        tokenBalance: user.tokenBalance || 0,
         total: user.walletBalance + user.escrowBalance,
       },
     });
@@ -480,6 +481,33 @@ const verifyDeposit = async (req, res, next) => {
   }
 };
 
+// ═══════════════════════════════════════════════════════════════════════════════
+// TOKEN UTILITIES
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const enterRaffle = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) return res.status(404).json({ success: false, message: "User not found" });
+
+    const currentTokens = user.tokenBalance || 0;
+    if (currentTokens < 50) {
+      return res.status(400).json({ success: false, message: "Insufficient SPX tokens." });
+    }
+
+    user.tokenBalance -= 50;
+    await user.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Successfully entered the weekly SPX raffle!",
+      tokensLeft: user.tokenBalance
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getWalletBalance,
   getTransactionHistory,
@@ -491,4 +519,5 @@ module.exports = {
   cancelWithdrawal,
   adminGetWithdrawals,
   adminProcessWithdrawal,
+  enterRaffle,
 };

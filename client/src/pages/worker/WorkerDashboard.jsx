@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Wallet, Lock, CheckCircle2, Star, Clock, ChevronRight, AlertCircle } from 'lucide-react';
+import { Wallet, Lock, CheckCircle2, Star, Clock, ChevronRight, AlertCircle, Trophy } from 'lucide-react';
 import WorkerLayout from '../../components/worker/WorkerLayout.jsx';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useToast } from '../../components/shared/Toast.jsx';
 import {
   getWalletBalance, getMyTasks, browseTasks,
   getTransactionHistory, getMyProfile, applyForTask,
+  enterRaffle,
 } from '../../api/worker.js';
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
@@ -148,6 +149,19 @@ const TaskCard = ({ task }) => {
 const WorkerDashboard = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const toast = useToast();
+  const queryClient = useQueryClient();
+
+  const raffleMut = useMutation({
+    mutationFn: enterRaffle,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['wallet-balance'] });
+      toast("Ticket secured! Good luck in Friday's draw.", 'success');
+    },
+    onError: (err) => {
+      toast(err?.response?.data?.message || 'Could not enter raffle', 'error');
+    }
+  });
 
   const { data: balance, isLoading: balanceLoading } = useQuery({
     queryKey: ['wallet-balance'],
@@ -205,6 +219,7 @@ const WorkerDashboard = () => {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: 16, marginBottom: 32 }}>
         <StatCard icon={Wallet} label="Available to withdraw" value={fmt(balance?.walletBalance)} color="#7ed348" action={() => navigate('/worker/wallet')} actionLabel="Withdraw" loading={balanceLoading} />
         <StatCard icon={Lock} label="Locked in active tasks" value={fmt(balance?.escrowBalance)} color="#c9a84c" loading={balanceLoading} />
+        <StatCard icon={Trophy} label="Total SPX Earned" value={`${balance?.wallet?.tokenBalance || 0} SPX`} color="#c9a84c" sub="More utility coming soon!" action={() => navigate('/worker/wallet')} actionLabel="Details" />
         <StatCard icon={CheckCircle2} label="Tasks finished" value={completedCount} color="#7ed348" />
         <StatCard
           icon={Star}
@@ -214,6 +229,25 @@ const WorkerDashboard = () => {
           sub={`Trust score: ${trustScore}/100`}
           loading={false}
         />
+      </div>
+
+      {/* ─── SPX Weekly Raffle ── */}
+      <div style={{ background: 'linear-gradient(135deg, rgba(201,168,76,0.1), rgba(126,211,72,0.05))', border: '1px solid rgba(201,168,76,0.3)', borderRadius: 16, padding: '24px 32px', marginBottom: 32, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 20 }}>
+        <div>
+          <h3 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: 26, color: '#c9a84c', margin: '0 0 4px', letterSpacing: '0.04em' }}>
+            🎟️ $50 Weekly SPX Raffle
+          </h3>
+          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14, margin: 0, maxWidth: 400, lineHeight: 1.5 }}>
+            Spend 50 SPX tokens for a chance to win a $50 fiat bonus directly to your wallet! Draws every Friday.
+          </p>
+        </div>
+        <button
+          onClick={() => !raffleMut.isPending && raffleMut.mutate()}
+          disabled={raffleMut.isPending}
+          style={{ background: 'linear-gradient(135deg, #c9a84c, #eab308)', border: 'none', borderRadius: 10, padding: '12px 24px', color: '#000', fontFamily: "'Outfit',sans-serif", fontWeight: 700, fontSize: 14, cursor: raffleMut.isPending ? 'not-allowed' : 'pointer', transition: 'all 0.2s', whiteSpace: 'nowrap', opacity: raffleMut.isPending ? 0.7 : 1 }}
+        >
+          {raffleMut.isPending ? 'Entering...' : 'Enter Raffle (50 SPX)'}
+        </button>
       </div>
 
       {/* ─── Available Tasks ── */}

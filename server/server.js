@@ -7,14 +7,11 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 
 const connectDB = require("./config/db");
-const connectRedis = require("./config/redis");
 const errorHandler = require("./middleware/errorHandler");
 const rateLimiter = require("./middleware/rateLimiter");
+require("./config/redis");
 
 const app = express();
-
-connectDB();
-connectRedis;
 
 // Must be registered BEFORE express.json() so webhook gets raw buffer
 app.use(
@@ -71,6 +68,12 @@ const server = http.createServer(app);
 const { initSocket } = require("./socket");
 initSocket(server);
 
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+const startServer = async () => {
+  await connectDB();
+
+  server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+};
+
+startServer();

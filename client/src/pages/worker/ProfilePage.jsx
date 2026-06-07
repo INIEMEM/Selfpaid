@@ -154,8 +154,13 @@ const ProfilePage = () => {
             <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: 32, letterSpacing: '0.05em', margin: '0 0 6px' }}>
               {profile?.firstName} {profile?.lastName}
             </h2>
-            <div style={{ display: 'inline-block', background: 'rgba(126,211,72,0.1)', border: '1px solid rgba(126,211,72,0.3)', borderRadius: 20, padding: '3px 14px', fontSize: 12, fontWeight: 600, color: '#7ed348', marginBottom: 16 }}>
-              Task Worker
+            <div style={{ display: 'flex', justifyContent: 'center', gap: 12, marginBottom: 16 }}>
+              <div style={{ background: 'rgba(126,211,72,0.1)', border: '1px solid rgba(126,211,72,0.3)', borderRadius: 20, padding: '3px 14px', fontSize: 12, fontWeight: 600, color: '#7ed348' }}>
+                Task Worker
+              </div>
+              <div style={{ background: 'linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05))', border: '1px solid rgba(201,168,76,0.5)', borderRadius: 20, padding: '3px 14px', fontSize: 12, fontWeight: 700, color: '#c9a84c', display: 'flex', alignItems: 'center', gap: 4 }} title="Gold Tier unlocked via SPX earned">
+                🪙 Gold Tier
+              </div>
             </div>
 
             {/* Trust Score */}

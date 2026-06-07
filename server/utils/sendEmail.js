@@ -1,21 +1,21 @@
-const sgMail = require("@sendgrid/mail");
+const { Resend } = require('resend');
+const logger = require('./logger');
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const sendEmail = async ({ to, subject, html }) => {
   try {
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
-    const msg = {
+    const result = await resend.emails.send({
+      from: process.env.FROM_EMAIL || 'SelfPaid <onboarding@resend.dev>',
       to,
-      from: process.env.FROM_EMAIL || "noreply@globaltaskplatform.com",
       subject,
-      html,
-    };
-
-    await sgMail.send(msg);
-    console.log(`Email sent successfully to ${to}`);
+      html
+    });
+    logger.info('Email sent successfully: ' + result.data.id);
+    return result;
   } catch (error) {
-    console.error("Error sending email:", error.response?.body || error.message);
-    throw new Error("Email could not be sent");
+    logger.error('Email send failed: ' + error.message);
+    throw error;
   }
 };
 

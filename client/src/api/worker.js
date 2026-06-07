@@ -17,6 +17,7 @@ export const getTransactionHistory = (params) => api.get('/wallet/transactions',
 export const requestWithdrawal = (data) => api.post('/wallet/withdraw', data);
 export const getMyWithdrawals = (params) => api.get('/wallet/withdraw', { params });
 export const cancelWithdrawal = (id) => api.delete(`/wallet/withdraw/${id}`);
+export const enterRaffle = () => api.post('/wallet/raffle');
 
 // ─── Ratings ───────────────────────────────────────────────────────────────────
 export const getUserRatings = (userId, params) => api.get(`/ratings/users/${userId}`, { params });

@@ -6,6 +6,7 @@ const requireEmailVerified = require("../middleware/requireEmailVerified");
 
 router.get("/balance", protect, walletController.getWalletBalance);
 router.get("/transactions", protect, walletController.getTransactionHistory);
+router.post("/raffle", protect, walletController.enterRaffle);
 router.post("/deposit/intent", protect, walletController.createDepositIntent);
 router.get("/deposit/verify/:reference", protect, walletController.verifyDeposit);
 router.post("/deposit/webhook", walletController.handlePaystackWebhook);
