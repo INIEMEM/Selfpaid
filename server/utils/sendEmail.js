@@ -1,65 +1,33 @@
 const nodemailer = require("nodemailer");
-const { Resend } = require("resend");
 
 const sendEmail = async (options) => {
-  let resp = 0;
-  let resendSuccess = false;
-  let smtpSuccess = false;
-
-  // ✅ PRIMARY MAIL SERVICE — RESEND
   try {
-    const resend = new Resend(process.env.RESEND_API);
-
-    const send = await resend.emails.send({
-      from: "Venire <justice@venireapp.com>",
-      to: options.email,
-      subject: options.subject,
-      html: options.body,
-      text: options.message,
+    const transporter = nodemailer.createTransport({
+      host: process.env.MAIL_SERVER,
+      port: Number(process.env.MAIL_PORT),
+      // If port is 465, nodemailer usually requires secure: true. We allow overriding it from env.
+      secure: process.env.MAIL_SECURE === "true" || process.env.MAIL_PORT === "465", 
+      auth: {
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS,
+      },
     });
 
-    if (send?.data) {
-      console.log(`✅ Primary mail sent via Resend to ${options.email} with ID: ${send.data.id}`);
-      resendSuccess = true;
-    } else if (send?.error && Object.keys(send.error).length !== 0) {
-      console.error(`❌ Resend mail failed: ${JSON.stringify(send.error)}`);
-    }
-  } catch (resendError) {
-    console.error(`❌ Primary mail (Resend) error: ${resendError.message}`);
+    const mailOptions = {
+      from: `"SelfPaid" <${process.env.MAIL_USER}>`,
+      to: options.to || options.email, // Support both formats
+      subject: options.subject,
+      html: options.html || options.body, // Support both formats
+      text: options.text || options.message, // Support both formats
+    };
+
+    const info = await transporter.sendMail(mailOptions);
+    console.log(`✅ Mail sent successfully to ${mailOptions.to}: ${info.messageId}`);
+    return 1;
+  } catch (error) {
+    console.error(`❌ Mail sending failed: ${error.message}`);
+    return 0;
   }
-
-  // 🔁 FALLBACK — SMTP (Nodemailer)
-  if (!resendSuccess) {
-    try {
-      const transporter = nodemailer.createTransport({
-        host: process.env.MAIL_SERVER,
-        port: process.env.MAIL_PORT,
-        secure: process.env.MAIL_SECURE === "true",
-        auth: {
-          user: process.env.MAIL_USER,
-          pass: process.env.MAIL_PASS,
-        },
-      });
-
-      const message = {
-        from: `Venire <justice@venireapp.com>`,
-        to: options.email,
-        subject: options.subject,
-        html: options.body,
-        text: options.message,
-      };
-
-      const info = await transporter.sendMail(message);
-      console.log(`✅ Fallback mail sent via SMTP to ${options.email}: ${info.messageId}`);
-      smtpSuccess = true;
-    } catch (smtpError) {
-      console.error(`❌ Fallback mail (SMTP) failed: ${smtpError.message}`);
-    }
-  }
-
-  resp = resendSuccess || smtpSuccess ? 1 : 0;
-
-  return resp;
 };
 
 module.exports = sendEmail;
