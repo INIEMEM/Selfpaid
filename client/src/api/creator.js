@@ -12,4 +12,5 @@ export const getTaskById = (id) => api.get(`/tasks/${id}`);
 // ─── Wallet ────────────────────────────────────────────────────────────────────
 export const getCreatorWalletBalance = () => api.get('/wallet/balance');
 export const getCreatorTransactions = (params) => api.get('/wallet/transactions', { params });
-export const createDepositIntent = (data) => api.post('/wallet/deposit', data);
+export const createDepositIntent = (data) => api.post('/wallet/deposit/intent', data);
+export const verifyDeposit = (reference) => api.get(`/wallet/deposit/verify/${reference}`);

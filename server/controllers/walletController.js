@@ -74,16 +74,24 @@ const createDepositIntent = async (req, res, next) => {
 
     const amountInKobo = Math.round(Number(amount) * 100);
 
-    const response = await paystackClient.initializeTransaction({
-      amount: amountInKobo,
-      email: req.user.email,
-      metadata: JSON.stringify({
-        userId: req.user.id.toString(),
-        userEmail: req.user.email,
+    const paystackRes = await fetch("https://api.paystack.co/transaction/initialize", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        amount: amountInKobo,
+        email: req.user.email,
+        callback_url: `${process.env.CLIENT_URL}/creator/wallet`,
+        metadata: {
+          userId: req.user.id.toString(),
+          userEmail: req.user.email,
+        },
       }),
     });
 
-    const body = response.body || response;
+    const body = await paystackRes.json();
 
     if (!body.data || !body.data.reference) {
       return res.status(500).json({ success: false, message: "Failed to initialize payment. Please try again." });

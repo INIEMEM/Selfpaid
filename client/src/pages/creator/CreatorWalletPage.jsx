@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Wallet, Lock, TrendingUp, ArrowUpCircle } from 'lucide-react';
 import CreatorLayout from '../../components/creator/CreatorLayout.jsx';
 import { useToast } from '../../components/shared/Toast.jsx';
-import { getCreatorWalletBalance, getCreatorTransactions, createDepositIntent } from '../../api/creator.js';
+import { getCreatorWalletBalance, getCreatorTransactions, createDepositIntent, verifyDeposit } from '../../api/creator.js';
 
 const fmt = (n) => `$${Number(n || 0).toFixed(2)}`;
 const fmtDate = (d) => d ? new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—';
@@ -28,6 +29,30 @@ const CreatorWalletPage = () => {
   const [txTab, setTxTab] = useState('');
   const [txPage, setTxPage] = useState(1);
   const [depositAmount, setDepositAmount] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Handle Paystack Redirect Verification
+  useEffect(() => {
+    const reference = searchParams.get('reference') || searchParams.get('trxref');
+    if (reference) {
+      toast('Verifying payment...', 'info');
+      verifyDeposit(reference)
+        .then(() => {
+          toast('Payment verified successfully!', 'success');
+          queryClient.invalidateQueries({ queryKey: ['creator-wallet-balance'] });
+          queryClient.invalidateQueries({ queryKey: ['creator-transactions'] });
+        })
+        .catch(() => {
+          toast('Payment verification is taking longer than expected. It will sync automatically.', 'error');
+        })
+        .finally(() => {
+          // Clean the URL so it doesn't try to verify again on reload
+          searchParams.delete('reference');
+          searchParams.delete('trxref');
+          setSearchParams(searchParams, { replace: true });
+        });
+    }
+  }, [searchParams, setSearchParams, queryClient]);
 
   const { data: balanceData, isLoading: balLoading } = useQuery({
     queryKey: ['creator-wallet-balance'],
@@ -44,7 +69,7 @@ const CreatorWalletPage = () => {
     onSuccess: (res) => {
       const url = res.data?.authorizationUrl || res.data?.data?.authorization_url;
       if (url) {
-        window.open(url, '_blank');
+        window.location.href = url;
         toast('Redirecting to Paystack payment gateway...', 'success');
       } else {
         toast('Deposit initiated. Check your email for payment link.', 'success');

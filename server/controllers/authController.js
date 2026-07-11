@@ -303,7 +303,9 @@ const forgotPassword = async (req, res) => {
     user.passwordResetExpires = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
     await user.save();
 
-    const resetUrl = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
+    // Use the origin of the request if available, otherwise fallback to env variable
+    const clientUrl = req.headers.origin || process.env.CLIENT_URL;
+    const resetUrl = `${clientUrl}/reset-password/${resetToken}`;
 
     try {
       await sendEmail({
