@@ -116,8 +116,8 @@ const LandingPage = () => {
           {/* Left: Punchy Copy */}
           <div className="animate-fade-up">
             <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(56px, 8vw, 100px)', lineHeight: 0.95, margin: '0 0 24px', color: '#fff' }}>
-              How work <br />
-              <span style={{ color: '#7ed348' }}>should work.</span>
+              Get Paid <br />
+              <span style={{ color: '#7ed348' }}>for what you do.</span>
             </h1>
             <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(16px, 2vw, 20px)', color: 'rgba(255,255,255,0.7)', margin: '0 0 40px', lineHeight: 1.6, maxWidth: 500 }}>
               Forget the endless back-and-forth and high platform fees. SelfPaid connects you with top global talent and secure escrow payouts.
@@ -281,7 +281,7 @@ const LandingPage = () => {
               <span style={{ background: 'linear-gradient(135deg, #c9a84c, #eab308)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Work.</span>
             </h2>
             <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 'clamp(15px, 1.5vw, 17px)', maxWidth: 560, margin: '0 auto', lineHeight: 1.7 }}>
-              Every completed task earns you <strong style={{ color: '#c9a84c' }}>+50 SPX tokens</strong> — SelfPaid&apos;s native reward currency. Use them for exclusive perks, raffles, and future platform privileges. It&apos;s completely free and automatic.
+              Every completed task earns you <strong style={{ color: '#c9a84c' }}>+50 SPX tokens</strong> — SelfPaid&apos;s native reward currency. Use them for exclusive perks and future platform privileges. It&apos;s completely free and automatic.
             </p>
           </div>
 
@@ -311,7 +311,6 @@ const LandingPage = () => {
             {/* Right: Perks Grid */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               {[
-                { icon: '🎟️', title: 'Weekly Cash Raffle', desc: 'Spend 50 SPX for a ticket in the weekly $50 cash draw. Winners paid directly to their SelfPaid wallet every Friday.' },
                 { icon: '🏆', title: 'Gold Tier Status', desc: 'Hold 1,000+ SPX to unlock your Gold Tier badge — visible on your profile to attract better-paying task creators.' },
                 { icon: '🔓', title: 'Elite Tasks Access', desc: 'Accumulate 1,000 SPX to unlock a hidden tier of premium, high-paying tasks not visible to standard workers.' },
                 { icon: '🚀', title: 'Future Utility', desc: 'As SelfPaid grows, $SPX will gain real-world value through exchange listings, creator boosts, and more.' },
