@@ -13,6 +13,9 @@ require("./config/redis");
 
 const app = express();
 
+// Trust Render/Heroku/Vercel reverse proxy so express-rate-limit reads the real client IP
+app.set("trust proxy", 1);
+
 // Must be registered BEFORE express.json() so webhook gets raw buffer
 app.use(
   "/api/wallet/deposit/webhook",
