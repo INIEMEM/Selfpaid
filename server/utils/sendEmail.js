@@ -5,8 +5,11 @@ const sendEmail = async (options) => {
     const transporter = nodemailer.createTransport({
       host: process.env.MAIL_SERVER,
       port: Number(process.env.MAIL_PORT),
-      // If port is 465, nodemailer usually requires secure: true. We allow overriding it from env.
-      secure: process.env.MAIL_SECURE === "true" || process.env.MAIL_PORT === "465", 
+      secure: process.env.MAIL_SECURE === "true" || process.env.MAIL_PORT === "465",
+      // Force IPv4 — Render's free tier does NOT support outbound IPv6
+      family: 4,
+      connectionTimeout: 10000,
+      socketTimeout: 15000,
       auth: {
         user: process.env.MAIL_USER,
         pass: process.env.MAIL_PASS,
