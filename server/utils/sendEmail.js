@@ -3,10 +3,17 @@ const nodemailer = require("nodemailer");
 
 const sendEmail = async (options) => {
   try {
+    // Manually resolve to IPv4 to bypass Render's broken IPv6 routing
+    const addresses = await dns.resolve4(process.env.MAIL_SERVER);
+    const ipv4Host = addresses[0];
+
     const transporter = nodemailer.createTransport({
-      host: process.env.MAIL_SERVER,
+      host: ipv4Host,
       port: Number(process.env.MAIL_PORT),
       secure: process.env.MAIL_SECURE === "true" || process.env.MAIL_PORT === "465",
+      tls: {
+        servername: process.env.MAIL_SERVER, // Required so SSL matches smtp.gmail.com
+      },
       auth: {
         user: process.env.MAIL_USER,
         pass: process.env.MAIL_PASS,
